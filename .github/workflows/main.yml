@@ -31,3 +31,8 @@ jobs:
           sed -nEi 's/(([0-9]+\.){3}[0-9]+) */add list=Whatsapp address=\1/p' Whatsapp-CIDR.rsc
           sed -i '1 i\\/ip firewall address-list' Whatsapp-CIDR.rsc
       # Add more steps to process the data and commit changes
+
+      - name: Copy CIDR.rsc files
+        run: |
+          cp Whatsapp-CIDR.rsc $GITHUB_WORKSPACE/Whatsapp-CIDR.rsc
+          cp Telegram-CIDR.rsc $GITHUB_WORKSPACE/Telegram-CIDR.rsc
