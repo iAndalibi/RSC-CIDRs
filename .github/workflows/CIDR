@@ -1,0 +1,29 @@
+name: Update CIDR Lists
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  update:
+    runs-on: alpine-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Fetch Telegram CIDR List
+        run: |
+          curl -s "https://core.telegram.org/resources/cidr.txt" | sed "s/[[:space:]]//g" > Telegram-CIDR.txt
+          # Additional processing steps (e.g., converting to .rsc format) go here
+
+      # Add more steps to process the data and commit changes
+      # ...
+
+      - name: Commit and Push
+        run: |
+          git config --global user.email $GIT_EMAIL
+          git config --global user.name $GIT_NAME
+          git add .
+          git commit -m "Update CIDR lists"
+          git push
