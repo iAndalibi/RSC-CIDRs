@@ -33,6 +33,8 @@ jobs:
       # Add more steps to process the data and commit changes
 
       - name: Copy CIDR.rsc files
-        run: |
-          cp Whatsapp-CIDR.rsc $GITHUB_WORKSPACE/Whatsapp-CIDR.rsc
-          cp Telegram-CIDR.rsc $GITHUB_WORKSPACE/Telegram-CIDR.rsc
+        uses: actions/upload-artifact@v4
+        with:
+          name: CIDR
+          path: |
+            *-CIDR.rsc
