@@ -3,6 +3,10 @@ name: Update CIDR Lists
 on:
   schedule:
     - cron: "0 0 * * *"
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
 
 jobs:
   update:
@@ -10,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Fetch Telegram CIDR List
         run: |
