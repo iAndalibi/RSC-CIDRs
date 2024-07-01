@@ -14,10 +14,18 @@ jobs:
 
       - name: Fetch Telegram CIDR List
         run: |
-          curl -s "https://core.telegram.org/resources/cidr.txt" | sed "s/[[:space:]]//g" > Telegram-CIDR.rsc
+          curl -s "https://core.telegram.org/resources/cidr.txt" > Telegram-CIDR.rsc
           # Additional processing steps (Converting to .rsc format)
           sed -nEi 's/(([0-9]+\.){3}[0-9]+) */add list=Telegram address=\1/p' Telegram-CIDR.rsc
           sed -i '1 i\\/ip firewall address-list' Telegram-CIDR.rsc
+
+      - name: Fetch Whatsapp CIDR List
+        run: |
+          curl -s "https://raw.githubusercontent.com/HybridNetworks/whatsapp-cidr/main/WhatsApp/whatsapp_cidr_ipv4.txt" > Whatsapp-CIDR.rsc
+          # From a project by HybridNetworks: https://github.com/HybridNetworks/whatsapp-cidr?tab=readme-ov-file
+          # Additional processing steps (Converting to .rsc format)
+          sed -nEi 's/(([0-9]+\.){3}[0-9]+) */add list=Whatsapp address=\1/p' Whatsapp-CIDR.rsc
+          sed -i '1 i\\/ip firewall address-list' Whatsapp-CIDR.rsc
       # Add more steps to process the data and commit changes
 
       - name: Commit and Push
