@@ -31,11 +31,3 @@ jobs:
           sed -nEi 's/(([0-9]+\.){3}[0-9]+) */add list=Whatsapp address=\1/p' Whatsapp-CIDR.rsc
           sed -i '1 i\\/ip firewall address-list' Whatsapp-CIDR.rsc
       # Add more steps to process the data and commit changes
-
-      - name: Commit and Push
-        run: |
-          git config --global user.email $GIT_EMAIL
-          git config --global user.name $GIT_NAME
-          git add .
-          git commit -m "Update CIDR lists"
-          git push
